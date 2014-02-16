@@ -124,27 +124,5 @@ class Customer
 				  City + "," + State + "," + Zip + "," + PhoneNumber + "," + Email + "\r\n";
 		return data;
 	}
-        
-	//The following method was added shortly after the rest of the class was finished,
-	//without comment as to function or indication who wrote it. The comment was 
-	//added at the last minute. Amy has not touched this function, even to correct the typo.
-	
-	// Clear all variables
-        
-        void ClearFields()
-        {
-            FirstName = "";
-            LastName = "";
-            Address = "";;
-            Address2 = "";
-            City = "";
-            State = "";
-            Zip = "";
-            PhoneNumber = "";
-            Email = "";
-  
  
-            
-        }
-	
 } //end class Customer
