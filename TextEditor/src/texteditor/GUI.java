@@ -608,9 +608,7 @@ public class GUI extends javax.swing.JFrame {
 
          if(error_flag == false)
          {
-
 				//grab text from output area in case of edits; append data from current customer object, display all
-				//revised lines by Amy
 				window_output_container = FileOutputArea.getText() + cst.print();
 				FileOutputArea.setText(window_output_container);
 
@@ -619,8 +617,6 @@ public class GUI extends javax.swing.JFrame {
          
          // reinitialize object using constructor to reset values
          cst = new Customer();
-
-         
     }//GEN-LAST:event_SaveRecordActionPerformed
 
     private void StateDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StateDropDownActionPerformed
@@ -647,9 +643,6 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitActionPerformed
 
     private void AddHeaderRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddHeaderRowActionPerformed
-
-// Coding by Bella Belova        
-        
        // Add or remove header line
         // Command button pressed once, toggle_header sets to true
         // Command buttone pressed second time, toggle_header sets to false
@@ -659,7 +652,7 @@ public class GUI extends javax.swing.JFrame {
             toggle_header = false;
         
         //get text from file output box first, in case of user edits (line added by Amy)
-	window_output_container = FileOutputArea.getText();
+		  window_output_container = FileOutputArea.getText();
    
         //Clean an output textbox to avoid duplicate header
         FileOutputArea.setText("");
@@ -683,9 +676,7 @@ public class GUI extends javax.swing.JFrame {
 		 //misclick; no code
     }//GEN-LAST:event_FirstNameFieldActionPerformed
 
-    
     //  The following lines of code will select text in textbox if clicked
-       
     private void FirstNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FirstNameFieldFocusGained
         FirstNameField.selectAll();
     }//GEN-LAST:event_FirstNameFieldFocusGained
@@ -732,8 +723,6 @@ public class GUI extends javax.swing.JFrame {
 					 JOptionPane.showMessageDialog(rootPane, "Error accessing file, please check filename and try again.", "File error", WIDTH);
 				}
 			}
-		  //else removed; no need for a popup if the user cancels access -Amy
-
 
    }//GEN-LAST:event_OpenFileActionPerformed
 
@@ -761,7 +750,7 @@ public class GUI extends javax.swing.JFrame {
 					ClearGUIFields();
 					FileOutputArea.setText("");
 
-				} catch (IOException e) //error message added by Amy
+				} catch (IOException e)
 
 					{
 						JOptionPane.showMessageDialog(rootPane, "Error saving file, please retry.", "File error", WIDTH);
@@ -783,8 +772,6 @@ public class GUI extends javax.swing.JFrame {
    }//GEN-LAST:event_ZipCodeFieldFocusGained
 
    private void NewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFileActionPerformed
-
-		//this button action written by Amy
 		//warn user that any data in fields will be lost
       if (JOptionPane.showConfirmDialog(rootPane, "This will clear all fields and delete all unsaved data.\nAre you sure?", "Data is not saved", 2) == 0)
             {
@@ -792,7 +779,6 @@ public class GUI extends javax.swing.JFrame {
 					ClearGUIFields();
 					FileOutputArea.setText("");
 				}
-		
    }//GEN-LAST:event_NewFileActionPerformed
 
 	/**
@@ -872,7 +858,7 @@ public class GUI extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-		//clear all GUI fields other than the file output area - written by Amy
+		//clear all GUI fields other than the file output area
 		private void ClearGUIFields()
 		{
 
