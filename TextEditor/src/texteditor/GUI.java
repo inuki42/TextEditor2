@@ -438,6 +438,16 @@ public class GUI extends javax.swing.JFrame {
 
         error_flag = false;             // Variable initiation set false
 
+		  
+		  //reverse the order of eval of all this - get rid of try catch, start at email
+		  //and work back up. make an error string variable, pre-pend the name of whatever
+		  //field throws an error (string = name + string) with a /n at the end of the
+		  //field name, then in the error dialogue, print out something like "error: these
+		  //required fields missing: [string]" and it'll be pretty. when a field fails
+		  //to pass a check, have it request focus. all this should evaluate only if
+		  //error flag is true; makes the "error flag false" if down there into an else instead.
+		  
+		  
         // First Name is required field.  If field is empty an error msg 
         // displays the error and focus set on missing field
         try
