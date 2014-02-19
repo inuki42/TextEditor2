@@ -40,23 +40,16 @@ public class GUI extends javax.swing.JFrame {
 	 * Creates new form GUI
 	 */
     
-    //Declare variables to use for error Exceptions
-    private String first_name;
-    private String last_name;
-    private String address1;
-    private String city;
-    private String State;
-    private String zip;
-    private String email;
+    //Declare variables to use for error handling
+	 private String errortext;
+	 private boolean error_flag = false;
     
     // Hold the data in the output textbox
     private String window_output_container;
     
     private String header = "First Name,Last Name,Address,Address 2,"
             + "City,State,Zip Code,Phone Number,Email Address\r\n";
-    //If the error exists in required fields, error_flag is set to true
-    private boolean error_flag = false;
-    
+
     //If header is displayed then toggle_header is true
     private boolean toggle_header = false;
     
@@ -436,187 +429,107 @@ public class GUI extends javax.swing.JFrame {
 
     private void SaveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveRecordActionPerformed
 
-        error_flag = false;             // Variable initiation set false
+		 //reinitialize the error handling variables
+        error_flag = false;
+		  errortext = "";
 
+		  /* 
+			* For all required fields, check to see if the field is empty.
+			* If empty, flip the error flag, have the field request focus,
+			* and add the name of the field to the error string. Fields are evaluated
+			* from bottom-up, which means the focus will end on the topmost field
+			* that is missing data.
+			*/
 		  
-		  //reverse the order of eval of all this - get rid of try catch, start at email
-		  //and work back up. make an error string variable, pre-pend the name of whatever
-		  //field throws an error (string = name + string) with a /n at the end of the
-		  //field name, then in the error dialogue, print out something like "error: these
-		  //required fields missing: [string]" and it'll be pretty. when a field fails
-		  //to pass a check, have it request focus. all this should evaluate only if
-		  //error flag is true; makes the "error flag false" if down there into an else instead.
+		  cst.setEmail(EmailAddressField.getText());
+  
+		  if(cst.getEmail().isEmpty() == true)
+
+		  {
+			  error_flag = true;
+			  errortext = "Email\n" + errortext;
+			  EmailAddressField.requestFocus();
+		  } //end email if
+
+		  cst.setZip(ZipCodeField.getText());
+
+		  if(ZipCodeField.getText().equals("     "))
+		  {
+			  ZipCodeField.setText("");
+			  error_flag = true;
+			  errortext = "Zip Code\n" + errortext;
+			  ZipCodeField.requestFocus();
+		  } //end zip if
+
+		  cst.setState((String)StateDropDown.getSelectedItem());
+           
+		  if (StateDropDown.getSelectedItem().equals((String)"Select"))
+		  {
+			  error_flag = true;
+			  errortext = "State\n" + errortext;
+   		  cst.setState("");     
+			  StateDropDown.requestFocus();
+		  } //end state if
+
+		  cst.setCity(CityField.getText());
+                    
+		  if(cst.getCity().isEmpty() == true)
+ 		  {
+			  error_flag = true;
+			  errortext = "City\n" + errortext;
+			  CityField.requestFocus();
+		  } //end city if	
+		     
+		  cst.setAddress(Address1Field.getText());
+            
+		  if(cst.getAddress().isEmpty() == true)
+		  {
+			  error_flag = true;
+			  errortext = "Address\n" + errortext;
+			  Address1Field.requestFocus();
+		  } //end address1 if
+
+
+		  cst.setLName(LastNameField.getText());
 		  
-		  
-        // First Name is required field.  If field is empty an error msg 
-        // displays the error and focus set on missing field
-        try
-        {
-            cst.setFName(FirstNameField.getText());
-            
-            if(cst.getFName().isEmpty() == true)
-            {
-                error_flag = true;
-                throw Exception (first_name);
-                            
-            }     // end if first name
+		  if(cst.getLName().isEmpty() == true)
+		  {
+			  error_flag = true;
+			  errortext = "Last Name\n" + errortext;
+			  LastNameField.requestFocus();
+		  } //end lastname if
+ 
+		  cst.setFName(FirstNameField.getText());
 
-         
-        }       // end try first name
+		  if(cst.getFName().isEmpty() == true)
+		  {
+			  error_flag = true;
+			  errortext = "First Name\n" + errortext;
+			  FirstNameField.requestFocus();
+		  } //end firstname if
+
+
+		  //two optional fields; no required checks for these
+  			cst.setAddress2(Address2Field.getText());
         
-        catch (Exception first_name)
-        {
-            JOptionPane.showMessageDialog(rootPane, "First Name missing", "First Name", WIDTH);
-            FirstNameField.requestFocus();
-                 
-        }   //end catch first name
-
-        // Last Name is required field.  If field is empty an error msg 
-        // displays the error and focus set on missing field
-        
-        try
-        {
-            cst.setLName(LastNameField.getText());
-            
-            if(cst.getLName().isEmpty() == true)
-            {
-                error_flag = true;
-                throw Exception (last_name);
-                            
-            }       // end if last name
-
-         }       // end try last name
-        
-        catch (Exception last_name)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Last Name missing", "Last Name", WIDTH);
-            LastNameField.requestFocus();
-            
-        }   //end catch last name
-               
-        
-        // Address1 is required field.  If field is empty an error msg 
-        // displays the error and focus set on missing field        
-        try
-        {
-            cst.setAddress(Address1Field.getText());
-            
-            if(cst.getAddress().isEmpty() == true)
-            {
-                error_flag = true;
-                throw Exception (address1);
-            
-            }       // end if address1
-
-         }       // end try address1
-        
-        catch (Exception address1)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Address missing", "Address", WIDTH);
-            Address1Field.requestFocus();
-
-        }   // end catch address1
-        
-        
-        // The field is optional.
-        cst.setAddress2(Address2Field.getText());
-                
-        
-        // City is required field.  If field is empty an error msg 
-        // displays the error and focus set on missing field        
-        try
-        {
-            cst.setCity(CityField.getText());
-            
-            if(cst.getCity().isEmpty() == true)
-            {
-                error_flag = true;
-                throw Exception (city);
-            }       // end if city
-
-         }       // end try city
-                
-         catch (Exception city)
-         {
-             JOptionPane.showMessageDialog(rootPane, "City missing", "City", WIDTH);
-             CityField.requestFocus();
-         
-         }   // end catch city
-        
-        // State is required field.  If field is empty an error msg 
-        // displays the error and focus set on missing field        
-        try
-        {
-            cst.setState((String)StateDropDown.getSelectedItem());
-            if (StateDropDown.getSelectedItem().equals((String)"Select"))
-
-            {
-                error_flag = true;
-                cst.setState("");     
-                throw Exception (State);
-            }
-          
-         }       // end try state
-                
-         catch (Exception State)
-         {
-             
-             JOptionPane.showMessageDialog(rootPane, "State missing", "State", WIDTH);                          
-         
-         }   // end catch state
-
-        // Email is required field.  If field is empty an error msg 
-        // displays the error and focus set on missing field        
-         try
-         {
-             cst.setEmail(EmailAddressField.getText());
-             
-             if(cst.getEmail().isEmpty() == true)
-             {
-                 error_flag = true;
-                 throw Exception (email);
-             }
-
-          }       // end try email
-                
-                      
-         catch (Exception email)
-         {
-             JOptionPane.showMessageDialog(rootPane, "EMail missing", "EMail Address", WIDTH);
-             EmailAddressField.requestFocus();
-         
-         }   //end catch email
-
-			cst.setZip(ZipCodeField.getText());
-			try
+   		//test string match to prevent output issues with masking
+			if(PhoneNumberField.getText().equals("(   )   -    "))
 			{
-				if(ZipCodeField.getText().length() != 5)
-				{
-					ZipCodeField.setText("");
-					error_flag = true;
-					throw Exception (zip);
-				}      // end if zip
-			}	// end try zip
+				cst.setPhone("");	// prevents the output from having the mask format show up
+			} //end if
+			else
+			{
+				cst.setPhone(PhoneNumberField.getText());
+			} //end else
 
-			catch (Exception zip) 
-         {
-             JOptionPane.showMessageDialog(rootPane, "Zip Code 5 digits", "Zip Code", WIDTH);
-             error_flag = true;
-             ZipCodeField.requestFocus();
-          
-         }      // end catch zip
 
-         //test string match to prevent output issues with masking
-				if(PhoneNumberField.getText().equals("(   )   -    "))
-				{
-					cst.setPhone("");	// prevents the output from having the mask format show up
-			   } //end if
-				else
-				{
-					cst.setPhone(PhoneNumberField.getText());
-				} //end else
-
-         if(error_flag == false)
+			//if the error flag was flipped, display an error message, using the error string
+			if(error_flag == true)
+			{
+				JOptionPane.showMessageDialog(rootPane, "Please enter all required fields to save record.\nMissing fields are:\n" 
+						  + errortext, "Required fields missing", WIDTH);
+			}
+			else
          {
 				//grab text from output area in case of edits; append data from current customer object, display all
 				window_output_container = FileOutputArea.getText() + cst.print();
@@ -625,7 +538,7 @@ public class GUI extends javax.swing.JFrame {
 				ClearGUIFields();
 			}
          
-         // reinitialize object using constructor to reset values
+         //no matter what happens, reinitialize object using constructor to reset values
          cst = new Customer();
     }//GEN-LAST:event_SaveRecordActionPerformed
 
@@ -674,10 +587,9 @@ public class GUI extends javax.swing.JFrame {
         }
         else
         {
-            //strip header length from start of string; this line cannot be called unless header has previously been added
-            
-            window_output_container = window_output_container.substring(header.length(), window_output_container.length());
-            FileOutputArea.setText(window_output_container);
+			  //strip header length from start of string; this line cannot be called unless header has previously been added
+ 			  window_output_container = window_output_container.substring(header.length(), window_output_container.length());
+			  FileOutputArea.setText(window_output_container);
         }
         
     }//GEN-LAST:event_AddHeaderRowActionPerformed
@@ -734,6 +646,9 @@ public class GUI extends javax.swing.JFrame {
 				}
 			}
 
+		  //somewhere in here - check the text that's now in the output box
+		  //string-match the first chunk against the header
+		  //if it matches, toggle the header flag to true
    }//GEN-LAST:event_OpenFileActionPerformed
 
    private void SaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileActionPerformed
