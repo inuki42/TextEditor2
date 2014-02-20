@@ -522,7 +522,6 @@ public class GUI extends javax.swing.JFrame {
 				cst.setPhone(PhoneNumberField.getText());
 			} //end else
 
-
 			//if the error flag was flipped, display an error message, using the error string
 			if(error_flag == true)
 			{
@@ -549,7 +548,6 @@ public class GUI extends javax.swing.JFrame {
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
 
         // Exit button pressed while there are not saved data in output textbox
-        
         if (FileOutputArea.getText().isEmpty() != true)
         {
             // Message box OK / Cancel to prevent loosing data.  "0" if OK is selected
@@ -646,7 +644,7 @@ public class GUI extends javax.swing.JFrame {
 				}
 			}
 
-		  //if the first row of the file being read in matches the header, set the toggle
+		  //if the first row of the file being read in matches the header, set the header toggle
 		  //this prevents duplicate header rows being added to loaded files
 		  //partial match rather than complete to avoid issues with \r\n characters in the actual header string
 		  String temp = FileOutputArea.getText().substring(0, 39);
@@ -785,14 +783,9 @@ public class GUI extends javax.swing.JFrame {
    private javax.swing.JScrollPane jScrollPane1;
    // End of variables declaration//GEN-END:variables
 
-    private Exception Exception(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-		//clear all GUI fields other than the file output area
+	//clear all GUI fields other than the file output area
 		private void ClearGUIFields()
 		{
-
 			FirstNameField.setText("");
 			LastNameField.setText("");
 			Address1Field.setText("");
