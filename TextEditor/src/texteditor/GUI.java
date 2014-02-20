@@ -646,9 +646,15 @@ public class GUI extends javax.swing.JFrame {
 				}
 			}
 
-		  //somewhere in here - check the text that's now in the output box
-		  //string-match the first chunk against the header
-		  //if it matches, toggle the header flag to true
+		  //if the first row of the file being read in matches the header, set the toggle
+		  //this prevents duplicate header rows being added to loaded files
+		  //partial match rather than complete to avoid issues with \r\n characters in the actual header string
+		  String temp = FileOutputArea.getText().substring(0, 39);
+		  if (temp.equals("First Name,Last Name,Address,Address 2,"))
+					 {
+						 toggle_header = true;
+					 }
+		  
    }//GEN-LAST:event_OpenFileActionPerformed
 
    private void SaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveFileActionPerformed
