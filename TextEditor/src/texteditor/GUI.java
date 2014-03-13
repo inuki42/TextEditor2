@@ -1,5 +1,5 @@
 /*
- * Graphical User Interface for Customer Information Submission
+ * Graphical User Interface for Customer Information Subvixion
  * Olympic Pride Project
  * Team Fearsome Foursome
  * GUI primarily developed by Scott Young
